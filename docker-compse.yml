@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+    nginx:
+        image: nginx:alpine
+        container_name: nginx-proxy
+        ports:
+            - '80:80'
+        volumes:
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+            - ./nginx/conf.d:/etc/nginx/conf.d:ro
+        networks:
+            - proxy-net
+        restart: always
+
+    ray-auto-deploy-server:
+        image: jin7942/ray-auto-deploy-server:latest
+        container_name: ray-auto-deploy-server
+        ports:
+            - '7979:7979'
+        networks:
+            - proxy-net
+        restart: unless-stopped
+        volumes:
+            - ./logs:/app/logs
+
+    nextuse-frontend:
+        build:
+            context: ./nextuse-frontend
+        container_name: nextuse-frontend
+        ports:
+            - '3000:3000'
+        networks:
+            - proxy-net
+            - frontend-backend-net
+        restart: unless-stopped
+        volumes:
+            - ./logs:/app/logs
+
+    nextuse-backend:
+        build:
+            context: ./nextuse-backend
+        container_name: nextuse-backend
+        ports:
+            - '8080:8080'
+        networks:
+            - frontend-backend-net
+            - backend-db-net
+        restart: unless-stopped
+        volumes:
+            - ./logs:/app/logs
+
+    nextuse-db:
+        image: mysql:8
+        container_name: nextuse-db
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: nextuse
+        ports:
+            - '3306:3306'
+        networks:
+            - backend-db-net
+        restart: unless-stopped
+        volumes:
+            - ./logs:/app/logs
+
+networks:
+    proxy-net:
+        driver: bridge
+    frontend-backend-net:
+        driver: bridge
+    backend-db-net:
+        driver: bridge
