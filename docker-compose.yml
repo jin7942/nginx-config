@@ -18,3 +18,4 @@ services:
 networks:
     jin-proxy:
         driver: bridge
+        external: true
