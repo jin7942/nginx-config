@@ -4,4 +4,13 @@
 
 운영 중인 각 컨테이너는 역할에 따라 별도의 Docker 네트워크로 분리되어 있으며, Nginx는 `jin-proxy` 네트워크를 통해 각 서비스 컨테이너로 트래픽을 라우팅합니다.
 
+리버스 프록시 대상 컨테이너
+
+-   dockwatch-frontend
+-   dockwatch-backend
+-   ray-auto-deploy-server
+-   upload
+-   used-market-frontend
+-   used-market-backend
+
 ![network-diagram](./docker_network.drawio.png)
