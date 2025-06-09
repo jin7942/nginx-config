@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
     used-market-db:
         image: mysql:8.0

@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
     ray-auto-deploy-server:
         image: ray-auto-deploy-server
