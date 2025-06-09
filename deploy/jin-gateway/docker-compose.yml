@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+    nginx:
+        image: nginx:alpine
+        container_name: jin-gateway
+        ports:
+            - '80:80'
+            - '443:443'
+        volumes:
+            - /srv/deploy/nginx-config/nginx.conf:/etc/nginx/nginx.conf:ro
+            - /srv/deploy/nginx-config/conf.d:/etc/nginx/conf.d:ro
+            - /srv/ssl:/etc/nginx/ssl:ro
+        networks:
+            - jin-proxy
+
+networks:
+    jin-proxy:
+        driver: bridge
+        external: true

@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+    dockwatch-backend:
+        image: dockwatch-backend
+        container_name: dockwatch-backend
+        networks:
+            - jin-proxy
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+
+    dockwatch-frontend:
+        image: dockwatch-frontend
+        container_name: dockwatch-frontend
+        networks:
+            - jin-proxy
+
+networks:
+    jin-proxy:
+        external: true

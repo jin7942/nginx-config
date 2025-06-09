@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+    used-market-db:
+        image: mysql:8.0
+        container_name: used-market-db
+        environment:
+            MYSQL_ROOT_PASSWORD: 1234
+            MYSQL_DATABASE: used_market_db
+        volumes:
+            - /srv/deploy/used-market-db:/var/lib/mysql
+        networks:
+            - backend-db
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    used-market-backend:
+        image: used-market-backend
+        container_name: used-market-backend
+        depends_on:
+            used-market-db:
+                condition: service_healthy
+        volumes:
+            - /srv/env/nextuse-backend/application.yml:/config/application.yml
+        networks:
+            - front-backend
+            - backend-db
+            - jin-proxy
+        healthcheck:
+            test: ['CMD', 'ping', '-c', '1', '127.0.0.1']
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    upload:
+        image: upload
+        container_name: upload
+        networks:
+            - front-upload
+            - jin-proxy
+        volumes:
+            - /srv/public/:/app/upload
+        healthcheck:
+            test: ['CMD', 'ping', '-c', '1', '127.0.0.1']
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    used-market-frontend:
+        image: used-market-frontend
+        container_name: used-market-frontend
+        depends_on:
+            used-market-backend:
+                condition: service_healthy
+        networks:
+            - jin-proxy
+            - front-backend
+            - front-upload
+        healthcheck:
+            test: ['CMD', 'ping', '-c', '1', '127.0.0.1']
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+networks:
+    backend-db:
+        external: true
+    front-backend:
+        external: true
+    front-upload:
+        external: true
+    jin-proxy:
+        external: true
