@@ -4,27 +4,27 @@
 set -e
 
 # jin-gateway
-echo "Starting jin-gateway..."
+echo "Stopping jin-gateway..."
 docker compose -f /srv/deploy/nginx-config/docker-compose.yml down 
-echo "jin-gateway started."
+echo "jin-gateway stopped."
 sleep 5
 
 # dockwatch
-echo "Starting dockwatch..."
+echo "Stopping dockwatch..."
 docker compose -f /srv/deploy/nginx-config/dockwatch/docker-compose.yml down 
-echo "dockwatch started."
+echo "dockwatch stopped."
 sleep 5
 
 # usedmarket
-echo "Starting usedmarket..."
+echo "Stopping usedmarket..."
 docker compose -f /srv/deploy/nginx-config/usedmarket/docker-compose.yml down 
-echo "usedmarket started."
+echo "usedmarket stopped."
 sleep 5
 
 # ray-auto-deploy-server
-echo "Starting ray-auto-deploy-server..."
+echo "Stopping ray-auto-deploy-server..."
 docker compose -f /srv/deploy/nginx-config/ray-auto-deploy-server/docker-compose.yml down 
-echo "ray-auto-deploy-server started."
+echo "ray-auto-deploy-server stopped."
 sleep 5
 
-echo "All services deployed successfully!"
+echo "All services stopped successfully!"
