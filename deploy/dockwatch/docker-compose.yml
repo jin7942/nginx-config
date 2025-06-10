@@ -29,3 +29,7 @@ services:
 networks:
     jin-proxy:
         external: true
+    dockwatch:
+        external: true
+    dockwatch-agent:
+        external: true
