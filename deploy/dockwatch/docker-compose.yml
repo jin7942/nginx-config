@@ -4,14 +4,27 @@ services:
         container_name: dockwatch-backend
         networks:
             - jin-proxy
+            - dockwatch
+            - dockwatch-agent
         extra_hosts:
             - 'host.docker.internal:host-gateway'
+        healthcheck:
+            test: ['CMD', 'ping', '-c', '1', '127.0.0.1']
+            interval: 10s
+            timeout: 5s
+            retries: 5
 
     dockwatch-frontend:
         image: dockwatch-frontend
         container_name: dockwatch-frontend
         networks:
             - jin-proxy
+            - dockwatch
+        healthcheck:
+            test: ['CMD', 'ping', '-c', '1', '127.0.0.1']
+            interval: 10s
+            timeout: 5s
+            retries: 5
 
 networks:
     jin-proxy:

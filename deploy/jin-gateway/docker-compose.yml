@@ -11,6 +11,11 @@ services:
             - /srv/ssl:/etc/nginx/ssl:ro
         networks:
             - jin-proxy
+        healthcheck:
+            test: ['CMD', 'ping', '-c', '1', '127.0.0.1']
+            interval: 10s
+            timeout: 5s
+            retries: 5
 
 networks:
     jin-proxy:
