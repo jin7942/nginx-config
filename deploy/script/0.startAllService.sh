@@ -11,19 +11,19 @@ sleep 5
 
 # dockwatch
 echo "Starting dockwatch..."
-docker compose -f /srv/deploy/nginx-config/dockwatch/docker-compose.yml up -d
+docker compose -f /srv/deploy/nginx-config/deploy/dockwatch/docker-compose.yml up -d
 echo "dockwatch started."
 sleep 5
 
 # usedmarket
 echo "Starting usedmarket..."
-docker compose -f /srv/deploy/nginx-config/usedmarket/docker-compose.yml up -d
+docker compose -f /srv/deploy/nginx-config/deploy/usedmarket/docker-compose.yml up -d
 echo "usedmarket started."
 sleep 5
 
 # ray-auto-deploy-server
 echo "Starting ray-auto-deploy-server..."
-docker compose -f /srv/deploy/nginx-config/ray-auto-deploy-server/docker-compose.yml up -d
+docker compose -f /srv/deploy/nginx-config/deploy/ray-auto-deploy-server/docker-compose.yml up -d
 echo "ray-auto-deploy-server started."
 sleep 5
 
