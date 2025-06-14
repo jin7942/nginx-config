@@ -3,7 +3,7 @@ services:
         image: mysql:8.0
         container_name: used-market-db
         env_file:
-        - /srv/env/nextuse-backend/.env
+            - /srv/env/nextuse-backend/.env
         volumes:
             - /srv/deploy/used-market-db:/var/lib/mysql
             - /srv/env/nextuse-backend/sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
