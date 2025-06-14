@@ -2,11 +2,11 @@ services:
     used-market-db:
         image: mysql:8.0
         container_name: used-market-db
-        environment:
-            MYSQL_ROOT_PASSWORD: 1234
-            MYSQL_DATABASE: used_market_db
+        env_file:
+        - /srv/env/nextuse-backend/.env
         volumes:
             - /srv/deploy/used-market-db:/var/lib/mysql
+            - /srv/env/nextuse-backend/sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
         networks:
             - backend-db
         healthcheck:
