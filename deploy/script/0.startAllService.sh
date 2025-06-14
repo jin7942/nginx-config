@@ -27,4 +27,6 @@ docker compose -f /srv/deploy/nginx-config/deploy/ray-auto-deploy-server/docker-
 echo "ray-auto-deploy-server started."
 sleep 5
 
+echo "========================================"
+docker ps -a
 echo "All services deployed successfully!"

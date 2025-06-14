@@ -27,4 +27,5 @@ docker compose -f /srv/deploy/nginx-config/deploy/ray-auto-deploy-server/docker-
 echo "ray-auto-deploy-server stopped."
 sleep 5
 
+echo "========================================"
 echo "All services stopped successfully!"
