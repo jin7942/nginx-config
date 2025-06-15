@@ -3,10 +3,10 @@ services:
         image: mysql:8.0
         container_name: used-market-db
         env_file:
-            - /srv/env/nextuse-backend/.env
+            - /config/env/nextuse-backend/.env
         volumes:
             - /srv/deploy/used-market-db:/var/lib/mysql
-            - /srv/env/nextuse-backend/sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+            - /config/env/nextuse-backend/sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
         networks:
             - backend-db
         healthcheck:
@@ -22,7 +22,7 @@ services:
             used-market-db:
                 condition: service_healthy
         volumes:
-            - /srv/env/nextuse-backend/application.yml:/config/application.yml
+            - /config/env/nextuse-backend/application.yml:/config/application.yml
         networks:
             - front-backend
             - backend-db

@@ -3,9 +3,9 @@ services:
         image: ray-auto-deploy-server
         container_name: ray-auto-deploy-server
         env_file:
-            - /srv/env/ray-auto-deploy-server/.env
+            - /config/env/ray-auto-deploy-server/.env
         volumes:
-            - /srv/env/ray-auto-deploy-server/ray.config.json:/app/ray.config.json
+            - /config/env/ray-auto-deploy-server/ray.config.json:/app/ray.config.json
             - /srv/logs/ray-auto-deploy-server:/app/logs
             - /var/run/docker.sock:/var/run/docker.sock
         networks:
