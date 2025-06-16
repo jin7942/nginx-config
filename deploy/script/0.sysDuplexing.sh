@@ -32,4 +32,5 @@ rm /tmp/upload.tar
 echo "===== 동기화가 완료되었습니다. ====="
 echo "종료 시간: $(date '+%Y-%m-%d %H:%M:%S')"
 
+echo "===== 백업 서버에서 컨테이너 재 배포를 시작합니다. ====="
 ssh jin-backup "/srv/deploy/nginx-config/deploy/script/1.redeploy.sh"

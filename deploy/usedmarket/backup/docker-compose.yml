@@ -1,0 +1,63 @@
+services:
+  used-market-db:
+    image: mysql:8.0
+    container_name: used-market-db
+    env_file:
+      - /config/env/nextuse-backend/.env
+    volumes:
+      - /srv/deploy/used-market-db:/var/lib/mysql
+      - /config/env/nextuse-backend/sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - backend-db
+    mem_limit: 256m
+    cpus: 0.3
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  used-market-backend:
+    image: used-market-backend
+    container_name: used-market-backend
+    depends_on:
+      used-market-db:
+        condition: service_healthy
+    volumes:
+      - /config/env/nextuse-backend/application.yml:/config/application.yml
+    networks:
+      - front-backend
+      - backend-db
+      - jin-proxy
+    mem_limit: 384m
+    cpus: 0.4
+    healthcheck:
+      test: ['CMD', 'ping', '-c', '1', '127.0.0.1']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  used-market-frontend:
+    image: used-market-frontend
+    container_name: used-market-frontend
+    depends_on:
+      used-market-backend:
+        condition: service_healthy
+    networks:
+      - jin-proxy
+      - front-backend
+    mem_limit: 192m
+    cpus: 0.2
+    healthcheck:
+      test: ['CMD', 'ping', '-c', '1', '127.0.0.1']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  backend-db:
+    external: true
+  front-backend:
+    external: true
+  jin-proxy:
+    external: true

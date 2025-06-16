@@ -11,7 +11,7 @@ docker compose -f /srv/deploy/nginx-config/docker-compose.yml down
 sleep 5
 
 echo "[usedmarket 컨테이너 종료] ====="
-docker compose -f /srv/deploy/nginx-config/deploy/usedmarket/docker-compose.yml down 
+docker compose -f /srv/deploy/nginx-config/deploy/usedmarket/backup/docker-compose.yml down 
 sleep 5
 
 echo "===== 기존 컨테이너 종료 완료 ====="
@@ -29,7 +29,7 @@ echo "[새 컨테이너 시작] ====="
 docker compose -f /srv/deploy/nginx-config/docker-compose.yml up -d --force-recreate
 sleep 5
 
-docker compose -f /srv/deploy/nginx-config/deploy/usedmarket/docker-compose.yml up -d --force-recreate
+docker compose -f /srv/deploy/nginx-config/deploy/usedmarket/backup/docker-compose.yml up -d --force-recreate
 sleep 5
 
 
