@@ -29,4 +29,4 @@ rm /tmp/used-market-frontend.tar
 echo "===== 동기화가 완료되었습니다. ====="
 echo "종료 시간: $(date '+%Y-%m-%d %H:%M:%S')"
 
-ssh jin-backup "/srv/script/1.redeploy.sh"
+ssh jin-backup "/srv/deploy/nginx-config/deploy/script/1.redeploy.sh"
