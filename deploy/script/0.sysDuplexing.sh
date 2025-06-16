@@ -19,12 +19,15 @@ echo "[도커 이미지 전송] usedmarket ====="
 
 docker save used-market-backend > /tmp/used-market-backend.tar
 docker save used-market-frontend > /tmp/used-market-frontend.tar
+docker save upload > /tmp/upload.tar
 
 scp /tmp/used-market-backend.tar jin-backup:/srv/images/
 scp /tmp/used-market-frontend.tar jin-backup:/srv/images/
+scp /tmp/upload.tar jin-backup:/srv/images/
 
 rm /tmp/used-market-backend.tar
 rm /tmp/used-market-frontend.tar
+rm /tmp/upload.tar
 
 echo "===== 동기화가 완료되었습니다. ====="
 echo "종료 시간: $(date '+%Y-%m-%d %H:%M:%S')"
