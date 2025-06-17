@@ -5,8 +5,10 @@ echo "대상    : jin-backup"
 echo "도메인  : ${BACKUP_DOMAIN:-N/A}"
 echo "시작 시간: $(date '+%Y-%m-%d %H:%M:%S')"
 
+set -e
+
 # rsync 실행
-rsync -avz --delete --rsync-path="sudo rsync" /srv/ jin-backup:/srv/
+rsync -avz --no-o --no-g --delete --rsync-path="sudo rsync" /srv/ jin-backup:/srv/
 rsync_exit_code=$?
 
 if [ $rsync_exit_code -ne 0 ]; then
