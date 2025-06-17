@@ -17,7 +17,7 @@ if [ $rsync_exit_code -ne 0 ]; then
 fi
 
 # 도커 이미지 전송
-echo "[도커 이미지 전송] usedmarket ====="
+echo "[도커 이미지 전송] usedmarket ===============>"
 
 docker save used-market-backend > /tmp/used-market-backend.tar
 docker save used-market-frontend > /tmp/used-market-frontend.tar
