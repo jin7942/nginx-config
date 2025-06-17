@@ -6,7 +6,7 @@ echo "도메인  : ${BACKUP_DOMAIN:-N/A}"
 echo "시작 시간: $(date '+%Y-%m-%d %H:%M:%S')"
 
 # rsync 실행
-rsync -avz --delete /srv/ jin-backup:/srv/
+rsync -avz --delete --rsync-path="sudo rsync" /srv/ jin-backup:/srv/
 rsync_exit_code=$?
 
 if [ $rsync_exit_code -ne 0 ]; then
