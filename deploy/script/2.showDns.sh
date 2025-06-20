@@ -11,11 +11,11 @@ CURRENT_CNAME=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$CF_Z
   -H "Content-Type: application/json" | jq -r '.result.content')
 
 echo "===== DNS 조회 ====="
-echo "현재 DNS: $CURRENT_CNAME"
+echo "현재 DNS값: $CURRENT_CNAME"
 
 # 주/예비 서버 판단
 if [ "$CURRENT_CNAME" = "jfree.iptime.org" ]; then
-  echo "현재 이 서버는 주 서버 입니다."
+  echo "주 서버 입니다."
 else
-  echo "현재 이 서버는 예비 서버 입니다."
+  echo "예비 서버 입니다."
 fi
