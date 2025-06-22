@@ -9,6 +9,7 @@ services:
             - /srv/logs/ray-auto-deploy-server:/app/logs
             - /var/run/docker.sock:/var/run/docker.sock
             - /srv:/srv
+            - /config:/config
         networks:
             - jin-proxy
         healthcheck:
