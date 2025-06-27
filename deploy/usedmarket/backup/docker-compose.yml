@@ -40,8 +40,8 @@ services:
     used-market-frontend:
         image: used-market-frontend
         container_name: used-market-frontend
-        env_file:
-            - /config/env/nextuse-frontend/.env
+        volumes:
+            - /config/env/nextuse-frontend/.env:/app/.env
         depends_on:
             used-market-backend:
                 condition: service_healthy
